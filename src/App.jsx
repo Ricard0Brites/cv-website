@@ -11,11 +11,11 @@ export default function App() {
           <Header></Header>
         </header>
       <div className="h-screen overflow-y-scroll snap-y snap-mandatory flex flex-col">
-        <section className=''>
+        <section>
           <About></About>
         </section>
-        <section >
-          
+        <section>
+          test section
         </section>
       </div>
     </div>
