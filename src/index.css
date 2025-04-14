@@ -12,6 +12,9 @@
     scroll-behavior: smooth;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
 ::-webkit-scrollbar{
