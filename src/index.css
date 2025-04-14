@@ -9,4 +9,11 @@
     font-weight: 400;
     font-style: normal;
     background-color: gray;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+::-webkit-scrollbar{
+    display: none;
 }
