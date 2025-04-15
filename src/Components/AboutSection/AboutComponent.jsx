@@ -4,7 +4,7 @@ export default function About() {
   
   return (
       <section id="about" className="min-h-screen snap-start flex flex-col items-center justify-center bg-zinc-100 dark:bg-zinc-900 px-6">
-        <div className="grow"></div>
+        <div className="grow w-screen"></div>
         <div className="text-center grow">
           <h2 className="text-4xl font-bold text-zinc-900 dark:text-zinc-100 mb-4">
             Hi!
