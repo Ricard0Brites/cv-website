@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import React, { Component } from 'react'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css'
 
 import Header from './Components/Header/HeaderComponent'
@@ -10,28 +11,53 @@ import WorkExperienceImage from './assets/PersonGaming3.avif'
 import EducationImage from './assets/Auditorium.avif'
 import ShowcaseImage from './assets/macbook2.avif'
 
-export default function App() {
-  return (
-    <div>
-        <header className="fixed top-0 left-0 w-full z-50">
-          <Header></Header>
-        </header>
-      <div className="h-screen overflow-y-scroll snap-y snap-mandatory flex flex-col">
-        <section className='snap-start'>
-          <About></About>
-        </section>
-        <section>
-          <div className='flex flex-col'>
-            
-            <div className='snap-start min-h-screen flex flex-row overflow-hidden field-sizing-fixed'>
-              <ImageCard imageSrc={WorkExperienceImage} title='Professional Experience'></ImageCard>
-              <ImageCard imageSrc={EducationImage} title='Education'></ImageCard>
-              <ImageCard imageSrc={ShowcaseImage} title='Showcase'></ImageCard>
-              <ImageCard imageSrc={HobbiesImage} title='Personal & Hobbies'></ImageCard>
-            </div>
+import AboutMePage from './Pages/AboutMe'
+import EducationPage from './Pages/Education'
+import PersonalInformationPage from './Pages/PersonalInformation'
+import ProfessionalExperiencePage from './Pages/ProfessionalExperience'
+import ShowcasePage from './Pages/Showcase'
+
+export default class App extends Component {
+  
+  GetRoutings()
+  {
+    return (
+      <Routes>
+        <Route path="/" element={this.GetFrontEnd()}/>
+        <Route path="/About" element={<AboutMePage/>}/>
+        <Route path="/PersonalInformation" element={<PersonalInformationPage/>}/>
+        <Route path="/Education" element={<EducationPage/>}/>
+        <Route path="/ProfessionalExperience" element={<ProfessionalExperiencePage/>}/>
+        <Route path="/Showcase" element={<ShowcasePage/>}/>
+      </Routes>
+    );
+  }
+
+  GetFrontEnd()
+  {
+    return (
+      <div className="snap-y snap-mandatory overflow-y-scroll scroll-smooth h-screen">
+        <div className="flex flex-col h-screen w-screen snap-start">
+          <Header />
+          <About />
+        </div>
+
+        <section className="snap-start h-screen w-screen">
+          <div className="flex flex-row overflow-x-auto h-full w-full">
+            <ImageCard imageSrc={WorkExperienceImage} title="Professional Experience" Link="/ProfessionalExperience" />
+            <ImageCard imageSrc={EducationImage} title="Education" Link="/Education" />
+            <ImageCard imageSrc={ShowcaseImage} title="Showcase" Link="/Showcase" />
+            <ImageCard imageSrc={HobbiesImage} title="Personal & Hobbies" Link="/PersonalInformation" />
           </div>
         </section>
       </div>
-    </div>
-  )
+  );}
+
+  render() {
+    return(
+          <Router>
+            {this.GetRoutings()}
+          </Router>
+    ); 
+  }
 }
