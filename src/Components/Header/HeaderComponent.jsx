@@ -63,12 +63,14 @@ const SunIcon = <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0
     <header className= {`sticky top-0 ${PrimaryBGColor} backdrop-blur-md border-b ${SecondaryBorderColor} shadow-sm`}>
       <div className="max-w-10xl mx-auto px-4 py-1 flex justify-between items-center">
         <div>
-          <h1 className= {`${PrimaryTextColor} text-l font-bold`}>
-            {`${Name}`}
-          </h1>
-          <p className= {`text-xs ${SecondaryTextColor}`}>
-            {`${Role}`} · {`${Location}`}
-          </p>
+          <a href='/'>
+            <h1 className= {`${PrimaryTextColor} text-l font-bold`}>
+              {`${Name}`}
+            </h1>
+            <p className= {`text-xs ${SecondaryTextColor}`}>
+              {`${Role}`} · {`${Location}`}
+            </p>
+          </a>
         </div>
         <button
           onClick={() => setDarkMode(!darkMode)} // Toggle dark mode
