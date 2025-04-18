@@ -43,7 +43,7 @@ export default class App extends Component {
         </div>
 
         <section className="snap-start h-screen w-screen">
-          <div className="flex flex-row overflow-x-auto h-full w-full">
+          <div className="flex flex-row overflow-x-clip overflow-y-clip h-full w-full">
             <ImageCard imageSrc={WorkExperienceImage} title="Professional Experience" Link="/ProfessionalExperience" />
             <ImageCard imageSrc={EducationImage} title="Education" Link="/Education" />
             <ImageCard imageSrc={ShowcaseImage} title="Showcase" Link="/Showcase" />
