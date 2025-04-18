@@ -60,26 +60,28 @@ const MoonIcon = <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 
 const SunIcon = <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={`size-6 ${Dark_PrimaryStrokeColor}`}><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" /></svg>;
 
   return (
-    <header className= {`relative h-1/25 ${PrimaryBGColor} ${SecondaryBorderColor}`}>
-      <div className="flex justify-between items-center">
-        <div>
-          <a href='/'>
-            <h1 className= {`${PrimaryTextColor} text-l font-bold`}>
-              {`${Name}`}
-            </h1>
-            <p className= {`text-xs ${SecondaryTextColor}`}>
-              {`${Role}`} · {`${Location}`}
-            </p>
-          </a>
-        </div>
-        <button
-          onClick={() => setDarkMode(!darkMode)} // Toggle dark mode
-          className={`p-2 rounded-full ${PrimaryBGColor} hover:${PrimaryHoverColor} transition`}
-          aria-label="Toggle dark mode"
-        >
-          {darkMode ? MoonIcon : SunIcon}
-        </button>
-      </div>
-    </header>
+    <header className={`relative h-14 ${PrimaryBGColor} ${SecondaryBorderColor}`}>
+  <div className="flex justify-between items-center h-full px-4">
+    {/* Left side */}
+    <a href="/" className="flex flex-col justify-center">
+      <h1 className={`${PrimaryTextColor} text-l font-bold`}>
+        {Name}
+      </h1>
+      <p className={`text-xs ${SecondaryTextColor}`}>
+        {Role} · {Location}
+      </p>
+    </a>
+
+    {/* Right side toggle */}
+    <button
+      onClick={() => setDarkMode(!darkMode)}
+      className={`p-2 rounded-full ${PrimaryBGColor} hover:${PrimaryHoverColor} transition`}
+      aria-label="Toggle dark mode"
+    >
+      {darkMode ? MoonIcon : SunIcon}
+    </button>
+  </div>
+</header>
+
   );
 }
