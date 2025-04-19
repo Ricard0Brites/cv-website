@@ -7,6 +7,7 @@ import JSON from '../Data/TEST_ProfessionalInformation.json'
 
 export default class ProfessionalExperience extends Component
 {
+    ElementKeys = 0;
     //#region Column Population
     ColumnReferences = [];
     GetColumnReferences(forceUpdate)
@@ -15,38 +16,64 @@ export default class ProfessionalExperience extends Component
       {
           this.ColumnReferences =
         [
-        document.getElementById('Column-1'),
-        document.getElementById('Column-2'),
-        document.getElementById('Column-3')
+          {  
+            Entries : 0,
+            Root : ReactDOM.createRoot(document.getElementById('Column-1')),
+            Content : []
+          },
+          {  
+            Entries : 0,
+            Root : ReactDOM.createRoot(document.getElementById('Column-2')),
+            Content : []
+          },
+          {  
+            Entries : 0,
+            Root : ReactDOM.createRoot(document.getElementById('Column-3')),
+            Content : []
+          }
         ];
       }
       return this.ColumnReferences;
     }
 
-    AddTile(TileType, ...args)
+    AddTile(JSONObject)
     {
-      switch (TileType) 
+      switch (JSONObject.TileType) 
       {
         case 0: /* This is a standard size tile */
-          const Col1Len = this.GetColumnReferences()[0].children.length;
-          const Col2Len = this.GetColumnReferences()[2].children.length;
+          const Col1Len = this.GetColumnReferences()[0].Entries;
+          const Col2Len = this.GetColumnReferences()[2].Entries;
 
           if(Col1Len == Col2Len || Col2Len > Col1Len)
           {
-            ReactDOM.createRoot(this.GetColumnReferences()[0]).render(<StandardTile {...args[0]} ></StandardTile>);
+            //Adds to the first Standard Column
+            this.GetColumnReferences()[0].Content.push(<StandardTile key={this.ElementKeys++} JSONObject={JSONObject} ></StandardTile>);
+            this.GetColumnReferences()[0].Entries++;
           }
           else if(Col1Len > Col2Len)
           {
-            ReactDOM.createRoot(this.GetColumnReferences()[2]).render(<StandardTile {...args[0]} ></StandardTile>);
+            // Adds to the second standard column (third in the layout)
+            this.GetColumnReferences()[2].Content.push(<StandardTile key={this.ElementKeys++} JSONObject={JSONObject} ></StandardTile>);
+            this.GetColumnReferences()[2].Entries++;
           }     
           break;
         
         case 1:
-          ReactDOM.createRoot(this.GetColumnReferences()[1]).render(<LargeTile {...args[0]} ></LargeTile>);
+          //Adds to the Middle Column
+          this.GetColumnReferences()[1].Content.push(<LargeTile key={this.ElementKeys++} JSONObject={JSONObject} ></LargeTile>);
+          this.GetColumnReferences()[1].Entries++;
           break;
         
         default:
           break;
+      }
+    }
+
+    RenderTiles()
+    {
+      for(let Col of this.ColumnReferences)
+      {
+        Col.Root.render(Col.Content)
       }
     }
     //#endregion
@@ -152,14 +179,13 @@ export default class ProfessionalExperience extends Component
     //#region React Framework Override
     componentDidMount()
     {
-        this.GetJSON();
-
         const TilesList = [...this.GetStandardTiles(), ...this.GetLargeTiles()];
 
         for(let Tile of TilesList)
         {
-          this.AddTile(Tile.TileType);
+          this.AddTile(Tile);
         }
+        this.RenderTiles();
     }
 
     render()
