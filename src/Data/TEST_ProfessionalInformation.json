@@ -1,0 +1,60 @@
+{
+    "Decimated": {
+        "TileType":0,
+        "CompanyName": "Decimated",
+        "RoleName": "Gameplay Programmer",
+        "Duration": "2022-2025",
+        "CompanyLogo": "",
+        "CompanyWebsite": "https://decimated.net/",
+        "ProjectLink": "https://store.epicgames.com/en-US/p/decimated-de8da4",
+        "Colaborators": [
+            "Anna Ivanova",
+            "Artem Chaika",
+            "Dmitriy Yaroslavtsev",
+            "Vladimir Semenyakin"
+        ],
+        "Role-Bullets": {
+            "UserInterface": [
+                "Refactored & Organized Settings UI",
+                "Vehicle Dash",
+                "Interactive Map",
+                "Various Forms",
+                "Quickslots",
+                "Weapon Slots",
+                "Statistic Gauges",
+                "Chat",
+                "Squads"
+            ],
+            "Systems": [
+                "Input",
+                "Playfab",
+                "Playfab - Cloudscript",
+                "Statistics (Hydration, Blood, HP, etc...)",
+                "Statistic Effects (Water bottle consumption, taking damage, etc...)",
+                "Gameplay Ability System",
+                "Gameplay Tags",
+                "Net-Code",
+                "Sound Implementation",
+                "Item Creation"
+            ],
+            "Extras": [
+                "Blueprint & C++ Organization done as development progressed. (I love organized code)",
+                "Debugged down to engine code multiple times (Sound bug, and loading screen bug)"
+            ],
+            "Tools": [
+                "Unreal Engine 4 & 5",
+                "Unreal Insights",
+                "Visual Studio Community 2022",
+                "Playfab",
+                "Perforce",
+                "Atlassian - Confluence",
+                "Atlassian - Jira",
+                "Figma",
+                "Google Sheets & Microsoft Excel",
+                "Adobe Premiere Pro",
+                "Adobe Photoshop",
+                "Draw.io"
+            ]
+        }
+    }
+}
