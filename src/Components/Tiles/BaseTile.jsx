@@ -1,15 +1,11 @@
-import React from 'react';
-
-export default function StandardTile({JSONObject}) {
+export default function StandardTile({JSONObject, OnClick}) {
   return (
-      <div className='flex flex-col h-[360px] w-full relative bg-white border-1 border-black'>
-        <div className='flex-9'>
-
-        </div>
-        <div className='pl-2 flex flex-1'>
-          {`${JSONObject.RoleName} - ${JSONObject.CompanyName}`} <br />
-          {`(${JSONObject.Duration})`}
-        </div>
-      </div>
+    <div className='flex flex-col  w-full relative pt-2 cursor-pointer' onClick={OnClick}>
+      <img src={JSONObject.CompanyLogo} className='object-contain h-full w-full' />
+    <div className='pl-2 flex flex-col justify-center flex-2'>
+      <span>{`${JSONObject.RoleName} - ${JSONObject.CompanyName}`}</span>
+      <span>{`(${JSONObject.Duration})`}</span>
+    </div>
+  </div>
   );
 }

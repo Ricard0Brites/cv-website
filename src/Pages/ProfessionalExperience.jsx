@@ -1,12 +1,42 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom/client'
 import Header from '../Components/Header/HeaderComponent';
 import StandardTile from '../Components/Tiles/BaseTile';
+import ExperienceDetails from '../Components/ExperienceDetails/ExperienceDetails'
 
 import JSON from '../Data/TEST_ProfessionalInformation.json'
 
+import '../index.css'
+
 export default class ProfessionalExperience extends Component
 {
+    ContentRoot = null;
+    HiddenContent = []; // innerHTML to make it easy & light to add and remove
+
+    state = {
+      showOverlay: false,
+      overlayContent: null,
+    };
+
+    openOverlay = (Content) => {
+      this.setState({showOverlay: true, overlayContent: Content})
+    
+      if(this.ContentRoot)
+      {
+        this.HiddenContent = this.ContentRoot.innerHTML; // cache element to display after closing the overlay
+        this.ContentRoot.innerHTML = ''; // hide element
+      }
+
+      ReactDOM.createRoot(this.ContentRoot).render
+      (
+        <ExperienceDetails JSONObject={Content}></ExperienceDetails>
+      );
+    };
+
+    closeOverlay = () => {
+      this.setState({showOverlay: false, overlayContent: null})
+    };
+
     ElementKeys = 0;
     //#region Column Population
     ColumnReferences = [];
@@ -47,20 +77,25 @@ export default class ProfessionalExperience extends Component
           if(Col1Len == Col2Len || Col2Len > Col1Len)
           {
             //Adds to the first Standard Column
-            this.GetColumnReferences()[0].Content.push(<StandardTile key={this.ElementKeys++} JSONObject={JSONObject} ></StandardTile>);
+            this.GetColumnReferences()[0].Content.push(
+            <StandardTile 
+              key={this.ElementKeys++}
+              JSONObject={JSONObject} 
+              OnClick={() => {this.openOverlay(JSONObject)}}>
+            </StandardTile>);
             this.GetColumnReferences()[0].Entries++;
           }
           else if(Col1Len > Col2Len)
           {
             // Adds to the second standard column (third in the layout)
-            this.GetColumnReferences()[2].Content.push(<StandardTile key={this.ElementKeys++} JSONObject={JSONObject} ></StandardTile>);
+            this.GetColumnReferences()[2].Content.push(<StandardTile key={this.ElementKeys++} JSONObject={JSONObject} OnClick={() => {this.openOverlay(JSONObject)}}></StandardTile>);
             this.GetColumnReferences()[2].Entries++;
           }     
           break;
         
         case 1:
-          //Adds to the Middle Column
-          this.GetColumnReferences()[1].Content.push(<LargeTile key={this.ElementKeys++} JSONObject={JSONObject} ></LargeTile>);
+          //Adds to the Middle Column (TODO later, this logic is only here to be completed when there are too many entries to display in 2 columns... large tile type doesnt exist ATM)
+          this.GetColumnReferences()[1].Content.push(<LargeTile key={this.ElementKeys++} JSONObject={JSONObject} OnClick={() => {this.openOverlay(JSONObject)}}></LargeTile>);
           this.GetColumnReferences()[1].Entries++;
           break;
         
@@ -179,30 +214,29 @@ export default class ProfessionalExperience extends Component
     //#region React Framework Override
     componentDidMount()
     {
-        const TilesList = [...this.GetStandardTiles(), ...this.GetLargeTiles()];
+      this.ContentRoot = document.getElementById('content-root');
 
-        for(let Tile of TilesList)
-        {
-          this.AddTile(Tile);
-        }
-        this.RenderTiles();
+      const TilesList = [...this.GetStandardTiles(), ...this.GetLargeTiles()];
+
+      for(let Tile of TilesList)
+      {
+        this.AddTile(Tile);
+      }
+      this.RenderTiles();
     }
 
     render()
   {
     return (
       <div className="w-screen h-screen overflow-y-scroll scroll-smooth">
-        
-        {/* === PAGE 1 === */}
             <div className={`flex-col w-full h-[100%] snap-start`}>
           <Header />
-          <div className="flex flex-1 w-full h-full">
+          <div id='content-root' className="flex flex-1 w-full h-full">
             <div className="flex flex-1"></div> {/* Left Spacer */}
 
             <div id='Column-1' className="flex-2">{/* Col 1 */}</div>
-            <div id='Column-2' className="flex-2">{/* Col 2 */}</div>
+            <div id='Column-2' className="flex-1">{/* Col 2 */}</div>
             <div id='Column-3' className="flex-2">{/* Col 3 */}</div>
-
 
             <div className="flex flex-1"></div> {/* Right Spacer */}
           </div>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap'); /* Share Tech Mono - Designed by Carrois Apostrophe*/
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap'); /* Share Tech Mono - Designed by Carrois Apostrophe */
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -8,7 +8,6 @@
     font-family: "Share Tech Mono", monospace;
     font-weight: 400;
     font-style: normal;
-    background-color: gray;
     scroll-behavior: smooth;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
@@ -16,6 +15,14 @@
     padding: 0;
     overflow-x: hidden;
 }
+
+body {
+    @apply bg-white text-black;
+  }
+  
+  .dark body {
+    @apply bg-zinc-900 text-white;
+  }
 
 ::-webkit-scrollbar{
     display: none;

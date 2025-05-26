@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Header from './Components/Header/HeaderComponent'
 import About from './Components/AboutSection/AboutComponent'
@@ -16,6 +15,8 @@ import EducationPage from './Pages/Education'
 import PersonalInformationPage from './Pages/PersonalInformation'
 import ProfessionalExperiencePage from './Pages/ProfessionalExperience'
 import ShowcasePage from './Pages/Showcase'
+
+import './index.css'
 
 export default class App extends Component {
   
